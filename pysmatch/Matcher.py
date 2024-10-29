@@ -1,6 +1,7 @@
 from __future__ import print_function
 import matplotlib.pyplot as plt
 from pysmatch import *
+import numpy as np
 import pysmatch.functions as uf
 from catboost import CatBoostClassifier
 from multiprocessing.pool import ThreadPool as Pool
@@ -516,6 +517,6 @@ class Matcher:
                               verbose=None)[:, 1]
 
         preds = (preds >= 0.5).astype(float)
-
+        preds = np.reshape(preds,(len(preds),1))
         accuracy = np.mean(preds == y.to_numpy())
         return accuracy
